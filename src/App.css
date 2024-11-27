@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 16px;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+button {
+  border: 2px solid gray;
+  padding: 8px 16px;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.actions-cell {
+  background-color: #fff;
+}
+
+.actions-wrapper {
+  display: flex;
+}
+
+.actions-wrapper > button {
+  border: none;
+}
+
+.view {
+  color: green;
+  font-size: 20px;
+}
+
+.edit {
+  color: gray;
+  font-size: 20px;
+}
+
+.delete {
+  color: red;
+  font-size: 20px;
+}
