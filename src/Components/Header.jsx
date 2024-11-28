@@ -12,16 +12,15 @@ const Header = ({
   return (
     <div className="header">
       <div className="search-wrapper">
-        {comments.length > 0 && (
-          <input
-            type="search"
-            placeholder="Search here..."
-            value={searchKey}
-            onChange={(e) => handleGlobalSearch(e)}
-            className="global-search"
-          />
-        )}
-        {showCount && (
+        
+        <input
+          type="search"
+          placeholder="Search here..."
+          value={searchKey}
+          onChange={(e) => handleGlobalSearch(e)}
+          className="global-search"
+        />
+        {showCount && comments.length > 0 && (
           <h2>
             Total {comments.length} item{comments.length > 1 && "s"} found!
           </h2>

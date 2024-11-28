@@ -2,12 +2,20 @@ import React from "react";
 import { FaEye } from "react-icons/fa";
 import { MdEdit, MdDelete } from "react-icons/md";
 import Loader from "./Loader";
+import { useNavigate } from "react-router-dom";
 
-const CustomTable = ({comments, openDeleteModal}) => {
+const CustomTable = ({ comments, openDeleteModal, getAllComments }) => {
+  const navigate = useNavigate();
+
+  const handleViewComment = (id) => {
+    navigate(`viewComment/${id}`);
+    getAllComments(id);
+  };
+
   return (
-    <>
+    <div className="table-wrapper">
       {comments?.length > 0 ? (
-        <table>
+        <table >
           <thead>
             <tr>
               <th>Id</th>
@@ -27,7 +35,10 @@ const CustomTable = ({comments, openDeleteModal}) => {
                 <td className="actions-cell">
                   <div className="actions-wrapper">
                     <button>
-                      <FaEye className="view" />
+                      <FaEye
+                        className="view"
+                        onClick={() => handleViewComment(comment?.id)}
+                      />
                     </button>
                     <button>
                       <MdEdit className="edit" />
@@ -47,7 +58,7 @@ const CustomTable = ({comments, openDeleteModal}) => {
       ) : (
         <Loader />
       )}
-    </>
+    </div>
   );
 };
 
