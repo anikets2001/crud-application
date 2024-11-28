@@ -24,11 +24,17 @@
   padding: 8px;
 }
 
+.table-wrapper {
+  margin-top: 16px;
+  max-height: calc(100vh - 130px);
+  overflow: auto;
+  padding-right: 8px;
+}
+
 table {
   font-family: arial, sans-serif;
-  border-collapse: collapse;
   width: 100%;
-  margin-top: 16px;
+  border-collapse: collapse;
 }
 
 td,
@@ -36,6 +42,15 @@ th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+th {
+  position: sticky;
+  top: -2px;
+  background-color: #fff;
+  text-align: left;
+  padding: 10px;
+  z-index: 1;
 }
 
 tr:nth-child(even) {
@@ -233,3 +248,54 @@ button {
 }
 
 /* classes for custom modal end */
+
+/* classes for view comment page start */
+
+.comment-container .button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0;
+}
+
+.comment-container .button-wrapper button {
+  border: 2px solid green;
+  color: green;
+}
+
+.id-section,
+.email-section {
+  background-color: #dcf0e0;
+}
+
+.name-section,
+.comment-section {
+  background-color: #d3d6d8;
+}
+
+.comment-container {
+  padding: 16px;
+}
+
+.comment-container div {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* classes for view comment page end */
+
+/* classes for scrollbar start */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 3px;
+}
+
+/* classes for scrollbar end */

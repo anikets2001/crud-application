@@ -26,6 +26,7 @@ const HomePage = () => {
       const json = await response.json();
       setComments(json);
       setAllComments(json);
+      setShowCount(false);
       localStorage.setItem("comments", JSON.stringify(json));
     } catch (error) {
       console.error(error);
@@ -89,7 +90,11 @@ const HomePage = () => {
           deleteAllComments={deleteAllComments}
           getAllComments={getAllComments}
         />
-        <CustomTable comments={comments} openDeleteModal={openDeleteModal} />
+        <CustomTable
+          comments={comments}
+          openDeleteModal={openDeleteModal}
+          getAllComments={getAllComments}
+        />
       </div>
 
       {/* confirm modal for deletion */}
