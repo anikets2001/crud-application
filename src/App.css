@@ -11,7 +11,17 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.global-search {
+  padding: 8px;
 }
 
 table {
