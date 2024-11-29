@@ -6,16 +6,22 @@ import CustomTable from "../Components/CustomTable";
 const HomePage = () => {
   const [showCount, setShowCount] = useState(false);
   const [searchKey, setSearchKey] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [deleteKey, setDeleteKey] = useState("");
   const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [editComment, setEditComment] = useState({});
   const [comments, setComments] = useState([]);
   const [allComments, setAllComments] = useState([]);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
     setDeleteKey("");
     setSelectedCommentId(null);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
   };
 
   const getAllComments = async () => {
@@ -49,15 +55,22 @@ const HomePage = () => {
         (comment) => comment.id !== selectedCommentId
       );
       setComments(updatedComments);
-      setAllComments(updatedComments); // Update original comments
+      setAllComments(updatedComments);
       localStorage.setItem("comments", JSON.stringify(updatedComments));
-      closeModal();
+      closeDeleteModal();
     }
   };
 
   const openDeleteModal = (id) => {
     setSelectedCommentId(id);
-    setIsModalOpen(true);
+    setIsDeleteModalOpen(true);
+  };
+
+  const openEditModal = (id) => {
+    setSelectedCommentId(id);
+    const selectedComment = allComments.find((comment) => comment?.id === id);
+    setEditComment(selectedComment);
+    setIsEditModalOpen(true);
   };
 
   const handleGlobalSearch = (e) => {
@@ -79,6 +92,41 @@ const HomePage = () => {
     }
   };
 
+  const handleNameChange = (e, id) => {
+    const newName = e.target.value;
+    setEditComment((prevComment) => ({ ...prevComment, name: newName }));
+
+    const updatedComments = comments.map((comment) =>
+      comment.id === id ? { ...comment, name: newName } : comment
+    );
+    setComments(updatedComments);
+  };
+
+  const handleEmailChange = (e, id) => {
+    const newEmail = e.target.value;
+    setEditComment((prevComment) => ({ ...prevComment, email: newEmail }));
+
+    const updatedComments = comments.map((comment) =>
+      comment.id === id ? { ...comment, email: newEmail } : comment
+    );
+    setComments(updatedComments);
+  };
+
+  const handleCommentChange = (e, id) => {
+    const newComment = e.target.value;
+    setEditComment((prevComment) => ({ ...prevComment, body: newComment }));
+
+    const updatedComments = comments.map((comment) =>
+      comment.id === id ? { ...comment, body: newComment } : comment
+    );
+    setComments(updatedComments);
+  };
+
+  const saveUpdatedComment = () => {
+    localStorage.setItem("comments", JSON.stringify(comments));
+    closeEditModal();
+  };
+
   return (
     <>
       <div className="container">
@@ -94,14 +142,27 @@ const HomePage = () => {
           comments={comments}
           openDeleteModal={openDeleteModal}
           getAllComments={getAllComments}
+          openEditModal={openEditModal}
         />
       </div>
 
-      {/* confirm modal for deletion */}
+      {/* Confirm modal for deletion */}
       <CustomModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
         title="Confirm Delete"
+        submitButton={
+          <button
+            onClick={deleteComment}
+            disabled={deleteKey !== "Delete"}
+            className={`${
+              deleteKey === "Delete" ? "btn-enabled" : "btn-disabled"
+            }`}
+          >
+            Delete
+          </button>
+        }
+        submitHandler={deleteComment}
       >
         <div className="delete-modal">
           <p>Type 'Delete' to proceed with deleting this comment!</p>
@@ -112,15 +173,49 @@ const HomePage = () => {
               onChange={(e) => setDeleteKey(e.target.value)}
               placeholder="Type here"
             />
-            <button
-              onClick={deleteComment}
-              disabled={deleteKey !== "Delete"}
-              className={`${
-                deleteKey === "Delete" ? "btn-enabled" : "btn-disabled"
-              }`}
-            >
-              Delete
-            </button>
+          </div>
+        </div>
+      </CustomModal>
+
+      {/* Modal for edit comment */}
+      <CustomModal
+        isOpen={isEditModalOpen}
+        onClose={closeEditModal}
+        title="Edit Comment"
+        submitButton={
+          <button className="save-button" onClick={saveUpdatedComment}>
+            Save
+          </button>
+        }
+      >
+        <div className="edit-modal-wrapper">
+          <div>
+            <h2>Id:</h2>
+            <input type="text" readOnly value={editComment?.id} className="disabled-field"/>
+          </div>
+          <div>
+            <h2>Name:</h2>
+            <input
+              type="text"
+              value={editComment?.name || ""}
+              onChange={(e) => handleNameChange(e, editComment?.id)}
+            />
+          </div>
+          <div>
+            <h2>Email:</h2>
+            <input
+              type="text"
+              value={editComment?.email || ""}
+              onChange={(e) => handleEmailChange(e, editComment?.id)}
+            />
+          </div>
+          <div>
+            <h2>Comment:</h2>
+            <input
+              type="text"
+              value={editComment?.body || ""}
+              onChange={(e) => handleCommentChange(e, editComment?.id)}
+            />
           </div>
         </div>
       </CustomModal>

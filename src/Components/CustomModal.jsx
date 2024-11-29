@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types"; // Import prop-types for validation
 
-const CustomModal = ({ isOpen, onClose, title, children }) => {
+const CustomModal = ({ isOpen, onClose, title, children, submitButton }) => {
   if (!isOpen) return null;
 
   return (
@@ -14,6 +14,12 @@ const CustomModal = ({ isOpen, onClose, title, children }) => {
           </button>
         </div>
         <div className="CustomModal-body">{children}</div>
+        <div className="modal-footer">
+          <div className="modal-actions">
+            <button onClick={onClose}>Cancel</button>
+            {submitButton}
+          </div>
+        </div>
       </div>
     </div>
   );

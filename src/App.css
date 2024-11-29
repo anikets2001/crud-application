@@ -247,6 +247,21 @@ button {
   cursor: pointer;
 }
 
+/* modal footer */
+.modal-footer {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-top: 1px solid gray;
+}
+
+.modal-footer .modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 /* classes for custom modal end */
 
 /* classes for view comment page start */
@@ -299,3 +314,37 @@ button {
 }
 
 /* classes for scrollbar end */
+
+/* classes for edit comment start */
+.save-button {
+  background-color: rgb(31, 114, 31);
+  color: #fff;
+  border-radius: 6px;
+  border: none;
+  padding: 10px 16px;
+}
+
+.edit-modal-wrapper {
+  padding: 0px 16px 16px 16px;
+}
+
+.edit-modal-wrapper div {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.edit-modal-wrapper div input {
+  background-color: #c9e5eb;
+  color: #000;
+  padding: 8px;
+}
+
+.edit-modal-wrapper div .disabled-field {
+  background-color: #c7c5c5;
+  color: #000;
+}
+
+
+/* classes for edit comment end */
