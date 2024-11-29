@@ -92,32 +92,12 @@ const HomePage = () => {
     }
   };
 
-  const handleNameChange = (e, id) => {
-    const newName = e.target.value;
-    setEditComment((prevComment) => ({ ...prevComment, name: newName }));
+  const handleFieldChange = (e, id) => {
+    const { name, value } = e.target;
+    setEditComment((prevComment) => ({ ...prevComment, [name]: value }));
 
     const updatedComments = comments.map((comment) =>
-      comment.id === id ? { ...comment, name: newName } : comment
-    );
-    setComments(updatedComments);
-  };
-
-  const handleEmailChange = (e, id) => {
-    const newEmail = e.target.value;
-    setEditComment((prevComment) => ({ ...prevComment, email: newEmail }));
-
-    const updatedComments = comments.map((comment) =>
-      comment.id === id ? { ...comment, email: newEmail } : comment
-    );
-    setComments(updatedComments);
-  };
-
-  const handleCommentChange = (e, id) => {
-    const newComment = e.target.value;
-    setEditComment((prevComment) => ({ ...prevComment, body: newComment }));
-
-    const updatedComments = comments.map((comment) =>
-      comment.id === id ? { ...comment, body: newComment } : comment
+      comment.id === id ? { ...comment, [name]: value } : comment
     );
     setComments(updatedComments);
   };
@@ -191,30 +171,38 @@ const HomePage = () => {
         <div className="edit-modal-wrapper">
           <div>
             <h2>Id:</h2>
-            <input type="text" readOnly value={editComment?.id} className="disabled-field"/>
+            <input
+              type="text"
+              readOnly
+              value={editComment?.id}
+              className="disabled-field"
+            />
           </div>
           <div>
             <h2>Name:</h2>
             <input
               type="text"
+              name="name"
               value={editComment?.name || ""}
-              onChange={(e) => handleNameChange(e, editComment?.id)}
+              onChange={(e) => handleFieldChange(e, editComment?.id)}
             />
           </div>
           <div>
             <h2>Email:</h2>
             <input
               type="text"
+              name="email"
               value={editComment?.email || ""}
-              onChange={(e) => handleEmailChange(e, editComment?.id)}
+              onChange={(e) => handleFieldChange(e, editComment?.id)}
             />
           </div>
           <div>
             <h2>Comment:</h2>
             <input
               type="text"
+              name="body"
               value={editComment?.body || ""}
-              onChange={(e) => handleCommentChange(e, editComment?.id)}
+              onChange={(e) => handleFieldChange(e, editComment?.id)}
             />
           </div>
         </div>
