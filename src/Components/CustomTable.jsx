@@ -4,7 +4,12 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 
-const CustomTable = ({ comments, openDeleteModal, getAllComments }) => {
+const CustomTable = ({
+  comments,
+  openDeleteModal,
+  getAllComments,
+  openEditModal,
+}) => {
   const navigate = useNavigate();
 
   const handleViewComment = (id) => {
@@ -15,7 +20,7 @@ const CustomTable = ({ comments, openDeleteModal, getAllComments }) => {
   return (
     <div className="table-wrapper">
       {comments?.length > 0 ? (
-        <table >
+        <table>
           <thead>
             <tr>
               <th>Id</th>
@@ -41,7 +46,10 @@ const CustomTable = ({ comments, openDeleteModal, getAllComments }) => {
                       />
                     </button>
                     <button>
-                      <MdEdit className="edit" />
+                      <MdEdit
+                        className="edit"
+                        onClick={() => openEditModal(comment?.id)}
+                      />
                     </button>
                     <button
                       type="button"
