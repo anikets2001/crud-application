@@ -1,22 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../Pages/HomePage";
-import ViewComment from "../Components/ViewComment";
+import ViewComment from "../Pages/ViewComment";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <HomePage />
-      </>
-    ),
+    element: <HomePage />,
   },
   {
     path: "/ViewComment/:id",
-    element: (
-      <>
-        <ViewComment />
-      </>
-    ),
+    element: <ViewComment />,
   },
 ]);
