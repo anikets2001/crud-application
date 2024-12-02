@@ -3,6 +3,8 @@ import { FaEye } from "react-icons/fa";
 import { MdEdit, MdDelete } from "react-icons/md";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
+import { FaLongArrowAltUp } from "react-icons/fa";
+import { FaLongArrowAltDown } from "react-icons/fa";
 
 const CustomTable = ({
   comments,
@@ -23,10 +25,38 @@ const CustomTable = ({
         <table>
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Comment</th>
+              <th>
+                <div className="sort-wrapper">
+                  <p>Id:</p>
+                  <button className="sort-button">
+                    <FaLongArrowAltUp />
+                  </button>
+                </div>
+              </th>
+              <th>
+                <div className="sort-wrapper">
+                  <p>Name:</p>
+                  <button className="sort-button">
+                    <FaLongArrowAltUp />
+                  </button>
+                </div>
+              </th>
+              <th>
+                <div className="sort-wrapper">
+                  <p>Email:</p>
+                  <button className="sort-button">
+                    <FaLongArrowAltUp />
+                  </button>
+                </div>
+              </th>
+              <th>
+                <div className="sort-wrapper">
+                  <p>Comment:</p>
+                  <button className="sort-button">
+                    <FaLongArrowAltUp />
+                  </button>
+                </div>
+              </th>
               <th></th>
             </tr>
           </thead>

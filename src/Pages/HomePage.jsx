@@ -26,18 +26,28 @@ const HomePage = () => {
 
   const getAllComments = async () => {
     try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/comments"
-      );
-      const json = await response.json();
-      setComments(json);
-      setAllComments(json);
-      setShowCount(false);
-      localStorage.setItem("comments", JSON.stringify(json));
+      const storedComments = localStorage.getItem("comments");
+  
+      if (storedComments) {
+        const parsedComments = JSON.parse(storedComments);
+        setComments(parsedComments);
+        setAllComments(parsedComments);
+        setShowCount(false);
+      } else {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/comments"
+        );
+        const json = await response.json();
+        setComments(json);
+        setAllComments(json);
+        setShowCount(false);
+        localStorage.setItem("comments", JSON.stringify(json));
+      }
     } catch (error) {
       console.error(error);
     }
   };
+  
 
   useEffect(() => {
     getAllComments();
