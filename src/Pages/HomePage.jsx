@@ -136,7 +136,7 @@ const HomePage = () => {
         />
       </div>
 
-      {/* Confirm modal for deletion */}
+      {/* Confirm modal for deletion (deleting comments) */}
       <CustomModal
         isOpen={isDeleteModalOpen}
         onClose={closeDeleteModal}
